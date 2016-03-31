@@ -86,9 +86,10 @@ string RNEncryptor::generateIv(int length)
 {
 	AutoSeededRandomPool prng;
 
-	byte iv[length];
+	byte* iv = new byte[length];
 	prng.GenerateBlock(iv, length);
-
-	return string((char *)iv, length);
+	string s = string((char *)iv, length);
+	delete[] iv;
+	return s;
 }
 
